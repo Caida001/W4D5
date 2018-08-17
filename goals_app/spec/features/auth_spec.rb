@@ -39,11 +39,20 @@ end
 
 feature 'logging out' do
   scenario 'begins with a logged out state' do
-
+    visit goals_url
+    expect(page).to_not have_content('Banana')
   end
 
   scenario 'doesn\'t show username on the homepage after logout' do
+    User.create(username: 'Banana', email: 'bnn@ananana.com', password: 'bananabread')
 
+    visit new_session_url
+    fill_in 'user_email', with: 'bnn@ananana.com'
+    fill_in 'user_password', with: 'bananabread'
+    click_on 'Log in'
+    click_on 'Logout'
+
+    expect(page).to_not have_content('Banana')
   end
 
 end
