@@ -31,7 +31,7 @@ RSpec.describe UsersController, type: :controller do
 
     context "with valid credentials" do
       it 'redirects to the user page' do
-        post :create, params: { user: { email: 'asdf@example.com', password: 'password' } }
+        post :create, params: { user: { username: 'asdf', email: 'asdf@example.com', password: 'password' } }
         expect(response).to redirect_to(user_url(User.last))
       end
     end

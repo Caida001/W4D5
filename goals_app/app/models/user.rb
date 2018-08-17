@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   before_validation :ensure_session_token
 
-  validates :email, presence: true, uniqueness: true
+  validates :username, :email, presence: true, uniqueness: true
   validates :session_token, :password_digest, presence: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
@@ -31,6 +31,8 @@ class User < ApplicationRecord
 
   def reset_session_token!
     self.session_token = self.class.generate_session_token
+    self.save!
+    self.session_token
   end
 
   def is_password?(password)

@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
   it { should validate_length_of(:password).is_at_least(6) }
 
   describe 'session token' do
-    let(:user) { User.create(email: 'asdf@example.com', password: 'asdfasdf') }
+    let(:user) { User.create(username: 'asdf', email: 'asdf@example.com', password: 'asdfasdf') }
     it 'is set automatically' do
       expect(user.session_token).to_not eq(nil)
     end
@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
   # Public Methods
   describe '::find_by_credentials' do
     before :each do
-      User.create(email: 'asdf@example.com', password: 'asdfasdf')
+      User.create(username: 'asdf', email: 'asdf@example.com', password: 'asdfasdf')
     end
 
     context 'given correct credentials' do
